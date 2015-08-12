@@ -2,11 +2,12 @@ define([
   'esri/map',
   'esri/layers/ArcGISTiledMapServiceLayer',
   'app/widgets/population/widget',
+  'app/widgets/blendselection/widget',
   'app/utils/popupUtil',
   'app/utils/rendererUtil'
 ], function(
   Map, ArcGISTiledMapServiceLayer,
-  PopulationWidget,
+  PopulationWidget, BlendSelectionWidget,
   popup,
   renderer
 ) {
@@ -32,6 +33,14 @@ define([
       url: 'http://services.arcgis.com/P3ePLMYs2RVChkJx/arcgis/rest/services/USA_Counties_Generalized/FeatureServer/0'
     }, 'population-container');
 
+    var blendSelectionWidget = new BlendSelectionWidget({}, 'blend-selection-container');
+    // one way to do update the blendMode
+    blendSelectionWidget.on('blend-select-update', function(mode) {
+      console.log('update blend mode with events');
+      renderer.blendMode = mode;
+      populationWidget.get('layer').setRenderer(renderer);
+      populationWidget.get('layer').refresh();
+    });
   });
 
 });

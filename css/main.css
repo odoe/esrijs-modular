@@ -12,6 +12,14 @@ html, body, #map {
   left: 0;
 }
 
+.blend-select {
+  position: fixed;
+  z-index: 999;
+  top: 10px;
+  right: 10px;
+  width: 150px;
+}
+
 .population-info {
   position: absolute;
   left: 20px;
